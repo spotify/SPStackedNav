@@ -21,7 +21,7 @@
     return self;
 }
 
--(SPStackedNavigationPageSize)stackedNavigationPageSize;
+- (SPStackedNavigationPageSize)stackedNavigationPageSize
 {
     return kStackedPageFullSize;
 }

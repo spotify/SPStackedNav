@@ -31,7 +31,7 @@ static BOOL IsIPad11() {
 @synthesize needsInitialPresentation = _needsInitialPresentation;
 @synthesize overlayOpacity = _overlayOpacity;
 
--(id)initWithFrame:(CGRect)frame VC:(UIViewController*)vc
+- (id)initWithFrame:(CGRect)frame VC:(UIViewController*)vc
 {
     if (!(self = [super initWithFrame:frame]))
         return nil;
@@ -114,20 +114,20 @@ static BOOL IsIPad11() {
 }
 
 
--(BOOL)isEqual:(id)object;
+- (BOOL)isEqual:(id)object
 {
     return [super isEqual:object] || [_vc isEqual:object] ||
         ([object isKindOfClass:[self class]] && [self.vc isEqual: [object vc]]);
 }
--(NSString*)description;
+- (NSString*)description
 {
     return [NSString stringWithFormat:@"<%@ %p: %@>", NSStringFromClass(self.class), self, self.vc];
 }
--(void)setVCVisible:(BOOL)VCVisible;
+- (void)setVCVisible:(BOOL)VCVisible
 {
-    if(VCVisible == self.VCVisible) return;
+    if (VCVisible == self.VCVisible) return;
     
-    if(VCVisible) {
+    if (VCVisible) {
         [self.screenshot removeFromSuperview];
         self.screenshot = nil;
         if (!self.markedForSuperviewRemoval || [_vc isViewLoaded])
@@ -144,7 +144,7 @@ static BOOL IsIPad11() {
         //[_vcContainer insertSubview:_screenshot atIndex:0];
     }
 }
--(BOOL)VCVisible;
+- (BOOL)VCVisible
 {
     return _vc.isViewLoaded && _vc.view.superview;
 }

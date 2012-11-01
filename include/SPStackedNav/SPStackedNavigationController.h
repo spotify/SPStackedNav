@@ -16,18 +16,18 @@ typedef enum
     except you can push VCs in the middle of it.
 */
 @interface SPStackedNavigationController : UIViewController
--(id)initWithRootViewController:(UIViewController *)rootViewController;
+- (id)initWithRootViewController:(UIViewController *)rootViewController;
 
 // activate specifies whether the pushed view controller should become the active view controller or not
--(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated; // activate = YES
--(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated activate:(BOOL)activate;
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated; // activate = YES
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated activate:(BOOL)activate;
 // replace everything on the stack after 'parent' with 'viewController'
--(void)pushViewController:(UIViewController *)viewController onTopOf:(UIViewController*)parent animated:(BOOL)animated; // activate = YES
--(void)pushViewController:(UIViewController *)viewController onTopOf:(UIViewController*)parent animated:(BOOL)animated activate:(BOOL)activate;
+- (void)pushViewController:(UIViewController *)viewController onTopOf:(UIViewController*)parent animated:(BOOL)animated; // activate = YES
+- (void)pushViewController:(UIViewController *)viewController onTopOf:(UIViewController*)parent animated:(BOOL)animated activate:(BOOL)activate;
 
--(UIViewController *)popViewControllerAnimated:(BOOL)animated;
--(NSArray *)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
--(NSArray *)popToRootViewControllerAnimated:(BOOL)animated;
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated;
+- (NSArray *)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (NSArray *)popToRootViewControllerAnimated:(BOOL)animated;
 
 /// Top of the stack
 @property(nonatomic,readonly) UIViewController *topViewController;
@@ -38,13 +38,13 @@ typedef enum
 /// Aligns the active view controller to the specified edge of the screen (left or right).
 /// Preserved between orientation changes.
 @property(nonatomic,assign,readonly) SPStackedNavigationPagePosition activeViewControllerPagePosition;
--(void)setActiveViewController:(UIViewController*)viewController animated:(BOOL)animated; // automatically calculates position
--(void)setActiveViewController:(UIViewController *)viewController position:(SPStackedNavigationPagePosition)position animated:(BOOL)animated;
+- (void)setActiveViewController:(UIViewController*)viewController animated:(BOOL)animated; // automatically calculates position
+- (void)setActiveViewController:(UIViewController *)viewController position:(SPStackedNavigationPagePosition)position animated:(BOOL)animated;
 
 /// Modal if it exists, otherwise active
--(NSArray *)visibleViewControllers;
+- (NSArray *)visibleViewControllers;
 @property(nonatomic,copy) NSArray *viewControllers;
--(void)setViewControllers:(NSArray *)viewControllers animated:(BOOL)animated;
+- (void)setViewControllers:(NSArray *)viewControllers animated:(BOOL)animated;
 
 // The scroll views pan gesture recognizer.
 // Will load the view if accessed, so make sure to check -isViewLoaded first.
@@ -69,7 +69,7 @@ typedef int SPStackedNavigationPageSize;
 @interface NSObject (SPStackedNavigationChild)
 /// How much width does this VC use when pushed on a SPStackedNavigationController?
 /// Default kStackedPageFullSize
--(SPStackedNavigationPageSize)stackedNavigationPageSize;
+- (SPStackedNavigationPageSize)stackedNavigationPageSize;
 @end
 
 /// Up-accessors from child VCs
@@ -81,17 +81,17 @@ typedef int SPStackedNavigationPageSize;
 @property(nonatomic,readonly) UINavigationController *navigationController;
 
 // Sent to child view controllers when active view controller is changed
--(void)viewDidBecomeActiveInStackedNavigation;
--(void)viewDidBecomeInactiveInStackedNavigation;
+- (void)viewDidBecomeActiveInStackedNavigation;
+- (void)viewDidBecomeInactiveInStackedNavigation;
 
 // Calls -[SPStackedNavigationController setActiveViewController:animated:]
 // Used to activate yourself when user interacts with a managed view (scrolling, opening a context menu, playing a track).
--(void)activateInStackedNavigationAnimated:(BOOL)animated;
+- (void)activateInStackedNavigationAnimated:(BOOL)animated;
 
 // Returns true if this is the currently active view controller.
--(BOOL)isActiveInStackedNavigation;
+- (BOOL)isActiveInStackedNavigation;
 @end
 
 @interface UINavigationController (SPStackedNavigationControllerCompatibility)
--(void)pushViewController:(UIViewController *)viewController onTopOf:(UIViewController*)parent animated:(BOOL)animated;
+- (void)pushViewController:(UIViewController *)viewController onTopOf:(UIViewController*)parent animated:(BOOL)animated;
 @end

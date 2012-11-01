@@ -13,7 +13,7 @@
 @implementation SPSideTabController
 #define BOTTOM_BAR_HEIGHT 69
 
--(void)loadView;
+- (void)loadView
 {
     CGRect afRect = [[UIScreen mainScreen] applicationFrame];
     CGRect pen = afRect;
@@ -47,7 +47,7 @@
     _mainContainer.backgroundColor = [UIColor blackColor];
     _bottomContainer.backgroundColor = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0];
     
-    if(_selectedViewController) {
+    if (_selectedViewController) {
         UIViewController *sel = _selectedViewController;
         [self setSelectedViewController:nil];
         [self setSelectedViewController:sel];
@@ -57,7 +57,7 @@
     [self setBottomAttachmentHidden:YES animated:NO];
 }
 
-- (void) viewDidLoad;
+- (void)viewDidLoad
 {
     [super viewDidLoad];
     
@@ -80,7 +80,7 @@
     [self setBottomAttachmentHidden:_bottomAttachmentHidden animated:NO];
 }
 
--(void)viewDidUnload;
+- (void)viewDidUnload
 {
     self.bottomContainer = nil;
     self.mainContainer = nil;
@@ -89,18 +89,18 @@
     [super viewDidUnload];
 }
 
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return YES;
 }
 
--(NSSet*)keyPathsForValuesAffectingValueForSelectedIndex;
+- (NSSet*)keyPathsForValuesAffectingValueForSelectedIndex
 {
     return [NSSet setWithObject:@"selectedViewController"];
 }
--(void)setViewControllers:(NSArray *)viewControllers;
+- (void)setViewControllers:(NSArray *)viewControllers
 {
-    if([viewControllers isEqual:_viewControllers]) return;
+    if ([viewControllers isEqual:_viewControllers]) return;
     
     [self setSelectedViewController:nil];
     
@@ -115,14 +115,14 @@
     
     for (UIViewController *vc in _viewControllers) [vc didMoveToParentViewController:self];
 }
--(void)setSelectedViewController:(UIViewController *)newVC;
+- (void)setSelectedViewController:(UIViewController *)newVC
 {
-    if(newVC == _selectedViewController) return;
+    if (newVC == _selectedViewController) return;
     
     UIViewController *oldVC = _selectedViewController;
     _selectedViewController = newVC;
     
-    if(![self isViewLoaded]) return;
+    if (![self isViewLoaded]) return;
     
     _tabBar.selectedItem = newVC.tabBarItem;
 
@@ -138,19 +138,19 @@
     [oldView removeFromSuperview];
     [_mainContainer addSubview:newView];
 }
--(NSUInteger)selectedIndex;
+- (NSUInteger)selectedIndex
 {
     return [_viewControllers indexOfObject:_selectedViewController];
 }
--(void)setSelectedIndex:(NSUInteger)selectedIndex;
+- (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
     [self setSelectedViewController:_viewControllers[selectedIndex]];
 }
--(NSArray *)additionalItems
+- (NSArray *)additionalItems
 {
     return _additionalItems;
 }
--(void)setAdditionalItems:(NSArray *)additionalItems
+- (void)setAdditionalItems:(NSArray *)additionalItems
 {
     if (_additionalItems != additionalItems)
     {
@@ -186,27 +186,27 @@
     
     [self.bottomAttachment didMoveToParentViewController:self];
 }
-- (void)tabBar:(SPSideTabBar *)tabBar didSelectItem:(UITabBarItem *)item;
+- (void)tabBar:(SPSideTabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
     NSArray *vcItems = [self.viewControllers valueForKey:@"tabBarItem"];
-    if([vcItems containsObject:item]) {
+    if ([vcItems containsObject:item]) {
         UIViewController *newVC = (self.viewControllers)[[vcItems indexOfObject:item]];
-        if(newVC != self.selectedViewController)
+        if (newVC != self.selectedViewController)
             self.selectedViewController = newVC;
         else {
-            if([newVC respondsToSelector:@selector(popToRootViewControllerAnimated:)])
+            if ([newVC respondsToSelector:@selector(popToRootViewControllerAnimated:)])
                 [(id)newVC popToRootViewControllerAnimated:YES];
         }
     } else
         [_tabBarDelegate tabBar:tabBar didSelectItem:item];
 }
 
-- (BOOL)isBottomAttachmentHidden;
+- (BOOL)isBottomAttachmentHidden
 {
     return _bottomAttachmentHidden;
 }
 
-- (void)setBottomAttachmentHidden:(BOOL)hide animated:(BOOL)animated;
+- (void)setBottomAttachmentHidden:(BOOL)hide animated:(BOOL)animated
 {
     _bottomAttachmentHidden = hide;
     if (![self isViewLoaded]) return;
@@ -214,7 +214,7 @@
     CGRect mainFrame = _mainContainer.frame;
     CGRect bottomFrame = _bottomContainer.frame;
     
-    if(!hide) {
+    if (!hide) {
         // shrink main frame
         mainFrame.size.height = self.view.frame.size.height - BOTTOM_BAR_HEIGHT;
         bottomFrame.origin.y = CGRectGetMaxY(mainFrame);
@@ -301,7 +301,7 @@
 @implementation SPTabBarItem
 @synthesize view = _buttonView;
 @synthesize imageName = _imageName;
-- (id)initWithTitle:(NSString *)title imageName:(NSString*)imageName tag:(NSInteger)tag;
+- (id)initWithTitle:(NSString *)title imageName:(NSString*)imageName tag:(NSInteger)tag
 {
     if (!(self = [super init]))
         return nil;

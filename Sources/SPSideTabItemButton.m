@@ -1,7 +1,7 @@
 #import "SPSideTabItemButton.h"
 
 @implementation SPSideTabItemButton
--(id)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame {
     if (!(self = [super initWithFrame:frame])) return nil;
     
     UILabel *label = [self titleLabel];
@@ -15,7 +15,7 @@
     return self;
 }
 
--(void)layoutSubviews {
+- (void)layoutSubviews {
     [super layoutSubviews];
     
     UIImageView *imageView = [self imageView];
@@ -36,18 +36,18 @@
     imageView.frame = imageFrame;
     label.frame = labelFrame;
     
-    if(self.badgeView){
+    if (self.badgeView){
         CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
         self.badgeView.center = CGPointMake(floorf(center.x + center.x/3), floorf(center.y - center.y/2));
         self.badgeView.frame = CGRectIntegral(self.badgeView.frame);
     }
 }
 
-- (void)setBadgeView:(UIView *)badgeView;
+- (void)setBadgeView:(UIView *)badgeView
 {
     [_badgeView removeFromSuperview];
     _badgeView = badgeView;
-    if(badgeView)
+    if (badgeView)
         [self addSubview:badgeView];
     [self setNeedsLayout];
 }

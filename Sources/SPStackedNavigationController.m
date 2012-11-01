@@ -13,14 +13,14 @@
 
 @implementation SPStackedNavigationController
 
-- (id)init;
+- (id)init
 {
-    if(!(self = [super init])) return nil;
+    if (!(self = [super init])) return nil;
     return self;
 }
-- (id)initWithRootViewController:(UIViewController *)rootViewController;
+- (id)initWithRootViewController:(UIViewController *)rootViewController
 {
-    if(!(self = [self init])) return nil;
+    if (!(self = [self init])) return nil;
     
     [self pushViewController:rootViewController animated:NO];
     [self setActiveViewController:rootViewController position:SPStackedNavigationPagePositionLeft animated:NO];
@@ -29,7 +29,7 @@
 }
 
 static const float kUnknownFrameSize = 10;
-- (void)loadView;
+- (void)loadView
 {
     CGRect frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
     UIView *root = [[UIView alloc] initWithFrame:frame];
@@ -54,7 +54,7 @@ static const float kUnknownFrameSize = 10;
 }
 
 #pragma mark view controllers manipulation entry points
--(void)pushPageContainerWithViewController:(UIViewController*)viewController
+- (void)pushPageContainerWithViewController:(UIViewController*)viewController
 {
     CGSize size = self.view.frame.size;
     CGRect frame = CGRectMake(self.view.bounds.size.width, 0, 0, size.height);
@@ -67,11 +67,11 @@ static const float kUnknownFrameSize = 10;
 }
 
 // Only these two methods actually manipulate _viewControllers
--(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     [self pushViewController:viewController animated:animated activate:YES];
 }
--(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated activate:(BOOL)activate
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated activate:(BOOL)activate
 {
     if (!viewController)
         return;
@@ -99,18 +99,18 @@ static const float kUnknownFrameSize = 10;
     [viewController didMoveToParentViewController:self];
     [self didChangeValueForKey:@"viewControllers"];
 }
--(void)pushViewController:(UIViewController *)viewController onTopOf:(UIViewController*)parent animated:(BOOL)animated;
+- (void)pushViewController:(UIViewController *)viewController onTopOf:(UIViewController*)parent animated:(BOOL)animated
 {
     [self pushViewController:viewController onTopOf:parent animated:animated activate:YES];
 }
--(void)pushViewController:(UIViewController *)viewController onTopOf:(UIViewController*)parent animated:(BOOL)animated activate:(BOOL)activate;
+- (void)pushViewController:(UIViewController *)viewController onTopOf:(UIViewController*)parent animated:(BOOL)animated activate:(BOOL)activate
 {
     while (![self.viewControllers containsObject:parent] && parent != nil)
         parent = [parent parentViewController];
     [self popToViewController:parent animated:animated];
     [self pushViewController:viewController animated:animated activate:activate];
 }
--(UIViewController *)popViewControllerAnimated:(BOOL)animated;
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
     UIViewController *viewController = [[self childViewControllers] lastObject];
     if (!viewController)
@@ -137,7 +137,7 @@ static const float kUnknownFrameSize = 10;
 }
 
 #pragma mark Convenience methods to the above two methods.
--(void)setViewControllers:(NSArray *)viewControllers animated:(BOOL)animated;
+- (void)setViewControllers:(NSArray *)viewControllers animated:(BOOL)animated
 {
     id commonVC = nil; int startI = NSNotFound;
     for(int i = 0, c = MIN([self.viewControllers count], [viewControllers count]); i < c; i++)
@@ -160,11 +160,11 @@ static const float kUnknownFrameSize = 10;
     for(id vc in toPush)
         [self pushViewController:vc animated:animated];
 }
--(void)setViewControllers:(NSArray *)viewControllers;
+- (void)setViewControllers:(NSArray *)viewControllers
 {
     [self setViewControllers:viewControllers animated:NO];
 }
--(void)setActiveViewController:(UIViewController*)viewController animated:(BOOL)animated
+- (void)setActiveViewController:(UIViewController*)viewController animated:(BOOL)animated
 {
     if (self.activeViewController == viewController ||
         [self.viewControllers indexOfObject:viewController] == NSNotFound)
@@ -177,7 +177,7 @@ static const float kUnknownFrameSize = 10;
                                    SPStackedNavigationPagePositionLeft)
                          animated:animated];
 }
--(void)setActiveViewController:(UIViewController *)viewController position:(SPStackedNavigationPagePosition)position animated:(BOOL)animated;
+- (void)setActiveViewController:(UIViewController *)viewController position:(SPStackedNavigationPagePosition)position animated:(BOOL)animated
 {
     NSArray *viewControllers = [self viewControllers];
     NSUInteger index = [viewControllers indexOfObject:viewController];
@@ -189,7 +189,7 @@ static const float kUnknownFrameSize = 10;
                                           0)
                      animated:animated];
 }
--(void)setActiveViewController:(UIViewController *)activeViewController position:(SPStackedNavigationPagePosition)position
+- (void)setActiveViewController:(UIViewController *)activeViewController position:(SPStackedNavigationPagePosition)position
 {
     if (_activeViewController != activeViewController)
     {
@@ -218,18 +218,18 @@ static const float kUnknownFrameSize = 10;
 
     return [[self viewControllers] subarrayWithRange:range];
 }
--(NSArray*)viewControllers; { return [self childViewControllers]; }
--(NSArray *)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (NSArray*)viewControllers; { return [self childViewControllers]; }
+- (NSArray *)popToViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     NSMutableArray *vcs = [NSMutableArray array];
     while(self.viewControllers.count > 0 && self.viewControllers.lastObject != viewController)
         [vcs addObject:[self popViewControllerAnimated:animated]];
     return vcs;
 }
--(NSArray *)popToRootViewControllerAnimated:(BOOL)animated;
+- (NSArray *)popToRootViewControllerAnimated:(BOOL)animated
 {
     int targetCount = 1;
-    if(self.viewControllers.count > 0 && [(self.viewControllers)[0] stackedNavigationPageSize] == kStackedPageHalfSize)
+    if (self.viewControllers.count > 0 && [(self.viewControllers)[0] stackedNavigationPageSize] == kStackedPageHalfSize)
         targetCount = 2;
     
     NSMutableArray *vcs = [NSMutableArray array];
@@ -238,37 +238,37 @@ static const float kUnknownFrameSize = 10;
     [self setActiveViewController:(self.viewControllers)[0] position:SPStackedNavigationPagePositionLeft animated:animated];
     return vcs;
 }
--(UIViewController*)topViewController;
+- (UIViewController*)topViewController
 {
     return self.viewControllers.lastObject;
 }
-- (UIGestureRecognizer*)panGestureRecognizer;
+- (UIGestureRecognizer*)panGestureRecognizer
 {
     (void)self.view; // make sure we're loaded
     return [_scroll panGestureRecognizer];
 }
 
 #pragma mark VC integration
--(UITabBarItem*)tabBarItem;
+- (UITabBarItem*)tabBarItem
 {
     return self.viewControllers.count==0?nil:[(self.viewControllers)[0] tabBarItem];
 }
 
 #pragma KVC
--(NSSet*)keyPathsForValuesAffectingTabBarItem;
+- (NSSet*)keyPathsForValuesAffectingTabBarItem
 {
     return [NSSet setWithObject:@"viewControllers"];
 }
--(NSSet*)keyPathsForValuesAffectingTopViewController;
+- (NSSet*)keyPathsForValuesAffectingTopViewController
 {
     return [NSSet setWithObject:@"viewControllers"];
 }
--(NSSet*)keyPathsForValuesAffectingVisibleViewController;
+- (NSSet*)keyPathsForValuesAffectingVisibleViewController
 {
     return [NSSet setWithObject:@"viewControllers"];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return YES;
 }
@@ -277,7 +277,7 @@ static const float kUnknownFrameSize = 10;
 #pragma mark Scroll delegate
 - (void)stackedNavigationScrollView:(SPStackedNavigationScrollView *)stackedNavigationScrollView
              didStopAtPageContainer:(SPStackedPageContainer *)stackedPageContainer
-                       pagePosition:(SPStackedNavigationPagePosition)pagePosition;
+                       pagePosition:(SPStackedNavigationPagePosition)pagePosition
 {
     [self setActiveViewController:stackedPageContainer.vc position:pagePosition];
 }
@@ -286,13 +286,13 @@ static const float kUnknownFrameSize = 10;
 
 
 @implementation UIViewController (SPStackedNavigationControllerItem)
--(SPStackedNavigationController*)stackedNavigationController;
+- (SPStackedNavigationController*)stackedNavigationController
 {
-    return $castIf(SPStackedNavigationController, self.parentViewController);
+    return $castif (SPStackedNavigationController, self.parentViewController);
 }
--(UINavigationController*)navigationController;
+- (UINavigationController*)navigationController
 {
-    if([self.parentViewController isKindOfClass:[SPStackedNavigationController class]] ||
+    if ([self.parentViewController isKindOfClass:[SPStackedNavigationController class]] ||
        [self.parentViewController isKindOfClass:[UINavigationController class]])
        return (id)self.parentViewController;
     return nil;
@@ -302,12 +302,12 @@ static const float kUnknownFrameSize = 10;
 
 - (void)viewDidBecomeInactiveInStackedNavigation { } // Default implementation does nothing
 
--(void)activateInStackedNavigationAnimated:(BOOL)animated;
+- (void)activateInStackedNavigationAnimated:(BOOL)animated
 {
     [self.stackedNavigationController setActiveViewController:self animated:animated];
 }
 
--(BOOL)isActiveInStackedNavigation
+- (BOOL)isActiveInStackedNavigation
 {
     return (self.stackedNavigationController.activeViewController == self);
 }
@@ -315,14 +315,14 @@ static const float kUnknownFrameSize = 10;
 @end
 
 @implementation NSObject (SPStackedNavigationChild)
--(SPStackedNavigationPageSize)stackedNavigationPageSize;
+- (SPStackedNavigationPageSize)stackedNavigationPageSize
 {
     return kStackedPageFullSize;
 }
 @end
 
 @implementation UINavigationController (SPStackedNavigationControllerCompatibility)
--(void)pushViewController:(UIViewController *)viewController onTopOf:(UIViewController*)parent animated:(BOOL)animated;
+- (void)pushViewController:(UIViewController *)viewController onTopOf:(UIViewController*)parent animated:(BOOL)animated
 {
     [self popToViewController:parent animated:animated];
     [self pushViewController:viewController animated:animated];

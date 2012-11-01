@@ -15,5 +15,5 @@
 @property(nonatomic) BOOL needsInitialPresentation;
 @property(nonatomic) CGFloat overlayOpacity;
 
--(id)initWithFrame:(CGRect)frame VC:(UIViewController*)vc;
+- (id)initWithFrame:(CGRect)frame VC:(UIViewController*)vc;
 @end

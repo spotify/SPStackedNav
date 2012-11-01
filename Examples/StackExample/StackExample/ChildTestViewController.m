@@ -13,7 +13,7 @@
 
 - (id)init
 {
-    if(!(self = [super init]))
+    if (!(self = [super init]))
         return nil;
     
     return self;
@@ -24,7 +24,7 @@
     [self.stackedNavigationController pushViewController:[ChildTestViewController new] onTopOf:self animated:YES];
 }
 
--(SPStackedNavigationPageSize)stackedNavigationPageSize;
+- (SPStackedNavigationPageSize)stackedNavigationPageSize;
 {
     return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad ? kStackedPageHalfSize : kStackedPageFullSize;
 }

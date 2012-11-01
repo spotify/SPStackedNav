@@ -10,7 +10,7 @@
 
 
 @implementation SPBadgeView
-+(UIFont*)badgeFont;
++ (UIFont*)badgeFont
 {
     return [UIFont boldSystemFontOfSize:15];
 }
@@ -30,13 +30,13 @@
     return self;
 }
 
--(void)setCount:(NSInteger)count;
+- (void)setCount:(NSInteger)count
 {
     _count = count;
     self.text = [NSString stringWithFormat:@"%d", count];
 }
 
--(void)setText:(NSString *)text;
+- (void)setText:(NSString *)text
 {
     _text = [text copy];
     // Resize to fit the badge
@@ -45,10 +45,10 @@
     r.size.width += 16;
     r.size.height += 2;
 
-    if(self.backgroundImage){
-        if(r.size.width < self.backgroundImage.size.width)
+    if (self.backgroundImage){
+        if (r.size.width < self.backgroundImage.size.width)
             r.size.width = self.backgroundImage.size.width;
-        if(r.size.height < self.backgroundImage.size.height)
+        if (r.size.height < self.backgroundImage.size.height)
             r.size.height = self.backgroundImage.size.height;
     }
     self.frame = CGRectIntegral(r);
@@ -65,14 +65,14 @@
 
     float r = self.bounds.size.height /2.;
     UIImage *image = self.backgroundImage;
-    if(self.highlighted || self.selected){
+    if (self.highlighted || self.selected){
         CGContextSetFillColorWithColor(ctx, [[UIColor whiteColor] CGColor]);
         image = self.highlightedBackgroundImage;
     } else {
         CGContextSetFillColor(ctx, (CGFloat[4]){0.369, 0.369, 0.369, 1});
     }
     
-    if(image){
+    if (image){
         [image drawInRect:self.bounds];
     } else {
         CGContextBeginPath(ctx);

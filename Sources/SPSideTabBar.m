@@ -11,12 +11,12 @@
 }
 @property(nonatomic,retain) NSArray *itemButtons;
 @property(nonatomic,retain) NSArray *additionalItemButtons;
--(void)itemButtonWasTapped:(SPSideTabItemButton*)button;
+- (void)itemButtonWasTapped:(SPSideTabItemButton*)button;
 @end
 
 @interface SPSideTabBadgeView : SPBadgeView
 + (SPSideTabBadgeView *) badgeViewWithFrame:(CGRect)frame;
--(void)bindToTabItem:(UITabBarItem *)item;
+- (void)bindToTabItem:(UITabBarItem *)item;
 @end
 
 
@@ -28,13 +28,13 @@
     _backgroundPattern = [UIColor colorWithPatternImage:bgI];
     
     CGRect r = self.frame;
-    if(r.size.width > [bgI size].width) {
+    if (r.size.width > [bgI size].width) {
         r.size.width = [bgI size].width;
         self.frame = r;
     }
 }
 
--(id)initWithFrame:(CGRect)r
+- (id)initWithFrame:(CGRect)r
 {
     if (!(self = [super initWithFrame:r]))
         return nil;
@@ -44,7 +44,7 @@
     return self;
 }
 
--(id)initWithCoder:(NSCoder*)decoder
+- (id)initWithCoder:(NSCoder*)decoder
 {
     if (!(self = [super initWithCoder:decoder]))
         return nil;
@@ -71,7 +71,7 @@
     } CGContextRestoreGState(context);
 }
 
--(UIImage*)imageForState:(UIControlState)state inItem:(UITabBarItem*)item;
+- (UIImage*)imageForState:(UIControlState)state inItem:(UITabBarItem*)item
 {
     UIImage *image = nil;
     
@@ -101,7 +101,7 @@
     return [UIImage imageNamed:[NSString stringWithFormat:@"%@-tb", imageName]];
 }
 
--(UIView*)buttonForItem:(UITabBarItem*)item withFrame:(CGRect)pen;
+- (UIView*)buttonForItem:(UITabBarItem*)item withFrame:(CGRect)pen
 {
     if ([item isKindOfClass:[SPTabBarItem class]] && [(SPTabBarItem*)item view]) {
         UIView *view = [(SPTabBarItem*)item view];
@@ -127,9 +127,9 @@
     return b;
 }
 
--(void)setItems:(NSArray*)items;
+- (void)setItems:(NSArray*)items
 {
-    if([items isEqual:_items]) return;
+    if ([items isEqual:_items]) return;
     
     self.selectedItem = nil;
     
@@ -138,7 +138,7 @@
     for(UIView *b in _itemButtons) [b removeFromSuperview];
     self.itemButtons = nil;
 
-    if(_items) {
+    if (_items) {
         NSMutableArray *itemButtons = [NSMutableArray array];
         CGRect pen = CGRectMake(0, 10, 80, 70);
         for(UITabBarItem *item in _items) {
@@ -151,16 +151,16 @@
     }
 }
 static const int kIsAdditionalItem = 1;
--(void)setAdditionalItems:(NSArray*)moreItems;
+- (void)setAdditionalItems:(NSArray*)moreItems
 {
-    if([moreItems isEqual:_additionalItems]) return;
+    if ([moreItems isEqual:_additionalItems]) return;
     
     _additionalItems = [moreItems copy];
     
     for(UIView *b in _additionalItemButtons) [b removeFromSuperview];
     self.additionalItemButtons = nil;
     
-    if(_additionalItems) {
+    if (_additionalItems) {
         NSMutableArray *itemButtons = [NSMutableArray array];
         CGRect pen = CGRectMake(0, self.frame.size.height-70-10, 80, 70);
         for(UITabBarItem *item in _additionalItems) {
@@ -175,36 +175,36 @@ static const int kIsAdditionalItem = 1;
     }
 }
 
--(void)itemButtonWasTapped:(SPSideTabItemButton*)button;
+- (void)itemButtonWasTapped:(SPSideTabItemButton*)button
 {
     NSArray *items = (button.tag == kIsAdditionalItem)?_additionalItems:_items;
     NSArray *buttons = (button.tag == kIsAdditionalItem)?_additionalItemButtons:_itemButtons;
     
     UITabBarItem *tappedItem = items[[buttons indexOfObject:button]];
-    if(!_delegate)
+    if (!_delegate)
         self.selectedItem = tappedItem;
     else
         [self.delegate tabBar:self didSelectItem:tappedItem];
 }
--(void)setSelectedItem:(UITabBarItem*)item;
+- (void)setSelectedItem:(UITabBarItem*)item
 {
-    if(item == _selectedItem) return;
+    if (item == _selectedItem) return;
     
-    if(_selectedItem) [_itemButtons[[_items indexOfObject:_selectedItem]] setSelected:NO];
+    if (_selectedItem) [_itemButtons[[_items indexOfObject:_selectedItem]] setSelected:NO];
     
     _selectedItem = item;
 
-    if(_selectedItem) [_itemButtons[[_items indexOfObject:_selectedItem]] setSelected:YES];
+    if (_selectedItem) [_itemButtons[[_items indexOfObject:_selectedItem]] setSelected:YES];
 }
--(void)select:(BOOL)selected additionalItem:(UITabBarItem*)item;
+- (void)select:(BOOL)selected additionalItem:(UITabBarItem*)item
 {
     [_additionalItemButtons[[_additionalItems indexOfObject:item]] setSelected:selected];
 }
--(CGRect)rectForItem:(UITabBarItem*)item;
+- (CGRect)rectForItem:(UITabBarItem*)item
 {
     NSUInteger idx = [_items indexOfObject:item];
     UIView *button = nil;
-    if(idx != NSNotFound) {
+    if (idx != NSNotFound) {
         button = _itemButtons[idx];
     } else {
         idx = [_additionalItems indexOfObject:item];
@@ -216,7 +216,7 @@ static const int kIsAdditionalItem = 1;
 
 @implementation SPSideTabBadgeView
 
-+ (SPSideTabBadgeView *) badgeViewWithFrame:(CGRect)frame;
++ (SPSideTabBadgeView *) badgeViewWithFrame:(CGRect)frame
 {
     SPSideTabBadgeView *badge = [[SPSideTabBadgeView alloc] initWithFrame:frame];
     badge.backgroundImage = [[UIImage imageNamed:@"unread-tb~ipad.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(11, 10, 11, 10)];
@@ -226,17 +226,17 @@ static const int kIsAdditionalItem = 1;
     return badge;
 }
 
--(void)bindToTabItem:(UITabBarItem *)item;
+- (void)bindToTabItem:(UITabBarItem *)item
 {
     SPRemoveAssociatedDependencies(self);
-    if(item)
+    if (item)
         $depends(@"badge value text", item, @"badgeValue", (id)^{
             selff.text = item.badgeValue;
             selff.hidden = item.badgeValue.length == 0;
         });
 }
 
--(void)dealloc;
+- (void)dealloc
 {
     SPRemoveAssociatedDependencies(self);
 }

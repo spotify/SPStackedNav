@@ -22,7 +22,7 @@ typedef NSInteger SPTabBarImageState;
 
 static UIImage *SPMakeTabBarImage(UIImage *source, SPTabBarImageState state)
 {
-    if(!source) return nil;
+    if (!source) return nil;
     
     UIImage *normalOverlay = [UIImage imageNamed:@"SPSideTabBar-button-overlay+normal.png"];
     UIImage *shinyOverlay = [UIImage imageNamed:@"SPSideTabBar-button-overlay+selected.png"];
@@ -43,10 +43,10 @@ static UIImage *SPMakeTabBarImage(UIImage *source, SPTabBarImageState state)
 
     UIGraphicsBeginImageContextWithOptions(r.size, NO, [[UIScreen mainScreen] scale]);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    if(!ctx) return nil;
+    if (!ctx) return nil;
     
     
-    if(state > SPTabBarImageStateNormal) { // Draw glow if selected
+    if (state > SPTabBarImageStateNormal) { // Draw glow if selected
         CGContextSetShadowWithColor(ctx, (CGSize){0,0}, 10, [UIColor colorWithHue:0.246 saturation:0.622 brightness:0.527 alpha:1.0].CGColor);
         [source drawInRect:centeredIcon];
         CGContextSetShadowWithColor(ctx, (CGSize){0,0}, 0, 0);
@@ -135,15 +135,15 @@ static UIImage *SPMakeTabBarImage(UIImage *source, SPTabBarImageState state)
 
 
 @implementation UIImage (SPTabBarImage)
--(UIImage*)sp_imageForTabBar;
+- (UIImage*)sp_imageForTabBar
 {
     return SPMakeTabBarImage(self, SPTabBarImageStateNormal);
 }
--(UIImage*)sp_selectedImageForTabBar;
+- (UIImage*)sp_selectedImageForTabBar
 {
     return SPMakeTabBarImage(self, SPTabBarImageStateSelected);
 }
--(UIImage*)sp_selectedAndHighlightedImageForTabBar;
+- (UIImage*)sp_selectedAndHighlightedImageForTabBar
 {
     return SPMakeTabBarImage(self, SPTabBarImageStateSelectedHiglighted);
 }

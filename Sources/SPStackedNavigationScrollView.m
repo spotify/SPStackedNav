@@ -29,8 +29,8 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
 @property(nonatomic,retain) UIPanGestureRecognizer *scrollRec;
 @property(nonatomic,retain) CADisplayLink *scrollAnimationTimer;
 @property(nonatomic,copy) void(^onScrollDone)();
--(void)scrollGesture:(UIPanGestureRecognizer*)grec;
--(void)updateContainerVisibilityByShowing:(BOOL)doShow byHiding:(BOOL)doHide;
+- (void)scrollGesture:(UIPanGestureRecognizer*)grec;
+- (void)updateContainerVisibilityByShowing:(BOOL)doShow byHiding:(BOOL)doHide;
 @end
 
 @implementation SPStackedNavigationScrollView {
@@ -46,7 +46,7 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
 @synthesize onScrollDone = _onScrollDone;
 @synthesize delegate = _delegate;
 
-- (id)initWithFrame:(CGRect)frame;
+- (id)initWithFrame:(CGRect)frame
 {
     if (!(self = [super initWithFrame:frame]))
         return nil;
@@ -85,7 +85,7 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
     return [self scrollRangeForPageContainer:[self.subviews lastObject]];
 }
 
-- (CGFloat)scrollOffsetForAligningPageWithRightEdge:(SPStackedPageContainer*)pageC;
+- (CGFloat)scrollOffsetForAligningPageWithRightEdge:(SPStackedPageContainer*)pageC
 {
     NSRange scrollRange = [self scrollRangeForPageContainer:pageC];
     return scrollRange.location // align left edge with left edge of screen
@@ -129,24 +129,24 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
     SPStackedPageContainer *left = [self.subviews sp_any:^BOOL(id obj) { return [obj VCVisible]; }];
     SPStackedPageContainer *right = [self.subviews sp_filter:^BOOL(id obj) { return [obj VCVisible]; }].lastObject;
     
-    if(vel < 0) // trying to reveal to the left
+    if (vel < 0) // trying to reveal to the left
         target = left;
     else // trying to reveal to the right
         target = right;
     
     // scroll extra far if user scrolls really fast
     int extraMove = (fabs(vel) > 8500 ? 2 : (fabs(vel) > 5500) ? 1 : 0)*fsign(vel);
-    if(extraMove != 0)
+    if (extraMove != 0)
         target = (self.subviews)[CLAMP((int)[self.subviews indexOfObject:target]+extraMove, 0, (int)(self.subviews.count-1))];
     
     // Align with left edge if scrolling left, or vice versa
     NSRange leftScrollRange = [self scrollRangeForPageContainer:left];
-    if(vel < 0 && extraMove == 0 && _actualOffset.x > (leftScrollRange.location + leftScrollRange.length/2)) {
+    if (vel < 0 && extraMove == 0 && _actualOffset.x > (leftScrollRange.location + leftScrollRange.length/2)) {
         SPStackedPageContainer *targetView = (self.subviews)[CLAMP((int)[self.subviews indexOfObject:left]+1, 0, (int)(self.subviews.count-1))];
         if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
             target = targetView;
         targetPoint = [self scrollOffsetForAligningPageWithRightEdge:targetView];
-    } else if(vel < 0)
+    } else if (vel < 0)
         targetPoint = [self scrollRangeForPageContainer:target].location;
     else
         targetPoint = [self scrollOffsetForAligningPageWithRightEdge:target];
@@ -178,18 +178,18 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
 }
 
 
-- (void)scrollGesture:(UIPanGestureRecognizer*)grec;
+- (void)scrollGesture:(UIPanGestureRecognizer*)grec
 {
-    if(grec.state == UIGestureRecognizerStateBegan) {
+    if (grec.state == UIGestureRecognizerStateBegan) {
         _scrollAtStartOfPan = _actualOffset;
         [self startRunLoop];
     }
-    else if(grec.state == UIGestureRecognizerStateChanged) {
+    else if (grec.state == UIGestureRecognizerStateChanged) {
         self.contentOffset = CGPointMake(_scrollAtStartOfPan.x-[grec translationInView:self].x, 0);
-    } else if(grec.state == UIGestureRecognizerStateFailed || grec.state == UIGestureRecognizerStateCancelled) {
+    } else if (grec.state == UIGestureRecognizerStateFailed || grec.state == UIGestureRecognizerStateCancelled) {
         [self stopRunLoop];
         [self setContentOffset:_scrollAtStartOfPan animated:YES];
-    } else if(grec.state == UIGestureRecognizerStateRecognized) {
+    } else if (grec.state == UIGestureRecognizerStateRecognized) {
         // minus: swipe left means navigate to VC to the right
         [self stopRunLoop];
         [self scrollAndSnapWithVelocity:-[grec velocityInView:self].x animated:YES];
@@ -217,7 +217,7 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
     _runningRunLoop = NO;
 }
 
-- (void)snapToClosest;
+- (void)snapToClosest
 {
     [self scrollAndSnapWithVelocity:0 animated:NO];
 }
@@ -238,18 +238,18 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
 
 #pragma mark Animating content offset
 @synthesize contentOffset = _targetOffset;
-- (void)setContentOffset:(CGPoint)contentOffset;
+- (void)setContentOffset:(CGPoint)contentOffset
 {
     [self setContentOffset:contentOffset animated:NO];
 }
 
-- (void)scrollAnimationFrame:(CADisplayLink*)cdl;
+- (void)scrollAnimationFrame:(CADisplayLink*)cdl
 {
-    if(fcompare(_targetOffset.x, _actualOffset.x, _scrollDoneMargin)) {
+    if (fcompare(_targetOffset.x, _actualOffset.x, _scrollDoneMargin)) {
         [self.scrollAnimationTimer invalidate]; self.scrollAnimationTimer = nil;
         [self setNeedsLayout];
         _actualOffset = _targetOffset;
-        if(_onScrollDone) {
+        if (_onScrollDone) {
             self.onScrollDone();
             self.onScrollDone = nil;
         } else
@@ -263,14 +263,14 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
     CGFloat movementPerSecond = CLAMP(abs(diff)*14, 20, 4000)*fsign(diff);
     CGFloat movement = movementPerSecond * delta;
     
-    if(abs(movement) > abs(diff)) movement = diff; // so we never step over the target point
+    if (abs(movement) > abs(diff)) movement = diff; // so we never step over the target point
     
     _actualOffset.x += movement;
     [self setNeedsLayout];
 }
-- (void)animateToTargetScrollOffset;
+- (void)animateToTargetScrollOffset
 {
-    if(_scrollAnimationTimer) return;
+    if (_scrollAnimationTimer) return;
     _scrollDoneMargin = kScrollDoneMarginNormal;
     self.scrollAnimationTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(scrollAnimationFrame:)];
     [_scrollAnimationTimer addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
@@ -278,10 +278,10 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
 }
 
 
-- (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated;
+- (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated
 {
     _targetOffset = contentOffset;
-    if(animated)
+    if (animated)
         [self animateToTargetScrollOffset];
     else {
         _actualOffset = _targetOffset;
@@ -296,16 +296,16 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
 
 
 
-- (void)layoutSubviews;
+- (void)layoutSubviews
 {
     CGRect pen = CGRectZero;
     pen.origin.x = -_actualOffset.x;
     
     // stretch scroll at start and end
-    if(_actualOffset.x < 0)
+    if (_actualOffset.x < 0)
         pen.origin.x = -_actualOffset.x/2;
     CGFloat maxScroll = [self scrollOffsetForAligningPageWithRightEdge:self.subviews.lastObject];
-    if(_actualOffset.x > maxScroll)
+    if (_actualOffset.x > maxScroll)
         pen.origin.x = -(maxScroll + (_actualOffset.x-maxScroll)/2);
 
     int i = 0;
@@ -321,7 +321,7 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
         if (pageC.markedForSuperviewRemoval)
             actualPen.origin.x = markedForSuperviewRemovalOffset;
         // Stack on the left
-        if(actualPen.origin.x < (MIN(i, 3))*3)
+        if (actualPen.origin.x < (MIN(i, 3))*3)
             [stackedViews addObject:pageC];
         else
             pageC.hidden = NO;
@@ -363,16 +363,16 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
 }
 
 #pragma mark Visibility
-- (void)updateContainerVisibilityByShowing:(BOOL)doShow byHiding:(BOOL)doHide;
+- (void)updateContainerVisibilityByShowing:(BOOL)doShow byHiding:(BOOL)doHide
 {
     BOOL bouncing = self.scrollAnimationTimer && fabsf(_targetOffset.x - _actualOffset.x) < 30;
     CGFloat pen = -_actualOffset.x;
     
     // stretch scroll at start and end
-    if(_actualOffset.x < 0)
+    if (_actualOffset.x < 0)
         pen = -_actualOffset.x/2;
     CGFloat maxScroll = [self scrollOffsetForAligningPageWithRightEdge:self.subviews.lastObject];
-    if(_actualOffset.x > maxScroll)
+    if (_actualOffset.x > maxScroll)
         pen = -(maxScroll + (_actualOffset.x-maxScroll)/2);
     
     CGFloat markedForSuperviewRemovalOffset = pen;
@@ -387,7 +387,7 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
         BOOL isCovered = currentPen + scrollRange.length <= 0;
         BOOL isVisible = !isOffScreenToTheRight && !isCovered;
         
-        if(pageC.VCVisible != isVisible && ((!isVisible && doHide) || (isVisible && doShow)))
+        if (pageC.VCVisible != isVisible && ((!isVisible && doHide) || (isVisible && doShow)))
         {
             if (!isVisible || !bouncing || (isVisible && pageC.needsInitialPresentation)) {
                 pageC.needsInitialPresentation = NO;
