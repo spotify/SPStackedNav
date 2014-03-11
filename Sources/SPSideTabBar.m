@@ -246,7 +246,7 @@ static void *kSPSideTabBadgeViewBadgeValueObservationContext = &kSPSideTabBadgeV
 	}
 	if(item) {
 		_item = item;
-		[_item addObserver:self forKeyPath:@"badgeValue" options:0 context:kSPSideTabBadgeViewBadgeValueObservationContext];
+		[_item addObserver:self forKeyPath:@"badgeValue" options:NSKeyValueObservingOptionInitial context:kSPSideTabBadgeViewBadgeValueObservationContext];
 	}
 }
 
