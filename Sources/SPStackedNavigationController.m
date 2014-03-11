@@ -293,14 +293,6 @@ static const float kUnknownFrameSize = 10;
 	return nil;
 }
 
-- (UINavigationController*)navigationController
-{
-    if ([self.parentViewController isKindOfClass:[SPStackedNavigationController class]] ||
-       [self.parentViewController isKindOfClass:[UINavigationController class]])
-       return (id)self.parentViewController;
-    return nil;
-}
-
 - (void)viewDidBecomeActiveInStackedNavigation { } // Default implementation does nothing
 
 - (void)viewDidBecomeInactiveInStackedNavigation { } // Default implementation does nothing

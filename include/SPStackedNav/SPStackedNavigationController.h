@@ -76,10 +76,6 @@ typedef int SPStackedNavigationPageSize;
 @interface UIViewController (SPStackedNavigationControllerItem)
 @property(nonatomic,readonly) SPStackedNavigationController *stackedNavigationController; // If this view controller has been pushed onto a navigation controller, return it.
 
-/// XXX: Might count as private API? Also, category loading order isn't deterministic :/
-/// Duck-type a SPStackedNav if that's the parent; return the UINavC if that's the parent; or nil.
-@property(nonatomic,readonly) UINavigationController *navigationController;
-
 // Sent to child view controllers when active view controller is changed
 - (void)viewDidBecomeActiveInStackedNavigation;
 - (void)viewDidBecomeInactiveInStackedNavigation;
