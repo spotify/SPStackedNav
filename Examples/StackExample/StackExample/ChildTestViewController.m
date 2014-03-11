@@ -15,6 +15,8 @@
 {
     if (!(self = [super init]))
         return nil;
+	
+	self.stackedNavigationController.tabBarItem.badgeValue = @"0";
     
     return self;
 }
@@ -22,6 +24,7 @@
 - (IBAction)test:(id)sender
 {
     [self.stackedNavigationController pushViewController:[ChildTestViewController new] onTopOf:self animated:YES];
+	self.stackedNavigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", self.stackedNavigationController.viewControllers.count];
 }
 
 - (SPStackedNavigationPageSize)stackedNavigationPageSize;

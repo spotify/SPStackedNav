@@ -3,7 +3,6 @@
 #import "SPSideTabItemButton.h"
 #import "UIImage+SPTabBarImage.h"
 #import "SPSideTabController.h"
-#import <SPSuccinct/SPSuccinct.h>
 
 @interface SPSideTabBar ()
 {
@@ -214,7 +213,20 @@ static const int kIsAdditionalItem = 1;
 }
 @end
 
+static void *kSPSideTabBadgeViewBadgeValueObservationContext = &kSPSideTabBadgeViewBadgeValueObservationContext;
 @implementation SPSideTabBadgeView
+{
+	UITabBarItem *_item;
+}
+
+- (void)dealloc
+{
+	if(_item) {
+		[_item removeObserver:self forKeyPath:@"badgeValue" context:kSPSideTabBadgeViewBadgeValueObservationContext];
+		_item = nil;
+	}
+
+}
 
 + (SPSideTabBadgeView *) badgeViewWithFrame:(CGRect)frame
 {
@@ -228,17 +240,23 @@ static const int kIsAdditionalItem = 1;
 
 - (void)bindToTabItem:(UITabBarItem *)item
 {
-    SPRemoveAssociatedDependencies(self);
-    if (item)
-        $depends(@"badge value text", item, @"badgeValue", (id)^{
-            selff.text = item.badgeValue;
-            selff.hidden = item.badgeValue.length == 0;
-        });
+	if(_item) {
+		[_item removeObserver:self forKeyPath:@"badgeValue" context:kSPSideTabBadgeViewBadgeValueObservationContext];
+		_item = nil;
+	}
+	if(item) {
+		_item = item;
+		[_item addObserver:self forKeyPath:@"badgeValue" options:0 context:kSPSideTabBadgeViewBadgeValueObservationContext];
+	}
 }
 
-- (void)dealloc
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    SPRemoveAssociatedDependencies(self);
+	if(context == kSPSideTabBadgeViewBadgeValueObservationContext) {
+		self.text = _item.badgeValue;
+		self.hidden = _item.badgeValue.length == 0;
+	} else [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
+
 
 @end

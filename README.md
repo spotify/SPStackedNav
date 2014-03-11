@@ -30,10 +30,9 @@ Extra tab bar items can be added along the bottom (e g for "Settings"), and the 
 Usage Instructions
 ------------------
 
-1. SPStackedNav depends on SPSuccinct. A version of SPSuccinct is bundled in Examples/StackExample/vendor, but it is recommended that you embed the latest version of SPSuccinct in your main project repository, from https://github.com/spotify/SPSuccinct
-2. Pull in "include", "Sources" and "Graphics" into your main project.
-3. Go to your project settings, then Build Settings for your app target, and change "Header Search Paths" to include "{your path to SPSuccinct}/SPSuccinct" and "{your path to SPStackedNav}/include".
-4. #import <SPStackedNav/SPStackedNav.h> either from your prefix header, or the source file where you want to use these classes.
+1. Pull in "include", "Sources" and "Graphics" into your main project.
+2. Go to your project settings, then Build Settings for your app target, and change "Header Search Paths" to include and "{your path to SPStackedNav}/include".
+3. #import <SPStackedNav/SPStackedNav.h> either from your prefix header, or the source file where you want to use these classes.
 
 See Examples/StackExample for some example usage.
 

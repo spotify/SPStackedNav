@@ -100,8 +100,8 @@
     textRect.origin.y = textRect.size.height / 2 - textSize.height / 2;
     [self.text drawInRect:textRect
                  withFont:self.font
-            lineBreakMode:UILineBreakModeClip
-                alignment:UITextAlignmentCenter];
+            lineBreakMode:NSLineBreakByClipping
+                alignment:NSTextAlignmentCenter];
 }
 
 @end

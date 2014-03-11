@@ -3,7 +3,6 @@
 #import "SPStackedNavigationScrollView.h"
 
 #import <QuartzCore/QuartzCore.h>
-#import <SPSuccinct/SPSuccinct.h>
 
 @interface SPStackedNavigationController () <UIScrollViewDelegate, SPStackedNavigationScrollViewDelegate>
 {
@@ -288,8 +287,12 @@ static const float kUnknownFrameSize = 10;
 @implementation UIViewController (SPStackedNavigationControllerItem)
 - (SPStackedNavigationController*)stackedNavigationController
 {
-    return $castif (SPStackedNavigationController, self.parentViewController);
+	id parent = self.parentViewController;
+	if([parent isKindOfClass:[SPStackedNavigationController class]])
+		return parent;
+	return nil;
 }
+
 - (UINavigationController*)navigationController
 {
     if ([self.parentViewController isKindOfClass:[SPStackedNavigationController class]] ||

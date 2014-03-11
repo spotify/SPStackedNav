@@ -1,7 +1,7 @@
 #import "SPStackedNavigationScrollView.h"
 #import "SPStackedPageContainer.h"
 #import <QuartzCore/QuartzCore.h>
-#import <SPSuccinct/SPSuccinct.h>
+#import "SPFunctional-mini.h"
 
 #ifndef CLAMP
 #define CLAMP(v, min, max) ({ \
@@ -126,8 +126,8 @@ static const CGFloat kPanScrollViewDeceleratingCaptureAngle = ((40.f) / 180.f * 
     CGFloat targetPoint;
     SPStackedPageContainer *target = nil;
     
-    SPStackedPageContainer *left = [self.subviews sp_any:^BOOL(id obj) { return [obj VCVisible]; }];
-    SPStackedPageContainer *right = [self.subviews sp_filter:^BOOL(id obj) { return [obj VCVisible]; }].lastObject;
+    SPStackedPageContainer *left = [self.subviews spstacked_any:^BOOL(id obj) { return [obj VCVisible]; }];
+    SPStackedPageContainer *right = [self.subviews spstacked_filter:^BOOL(id obj) { return [obj VCVisible]; }].lastObject;
     
     if (vel < 0) // trying to reveal to the left
         target = left;

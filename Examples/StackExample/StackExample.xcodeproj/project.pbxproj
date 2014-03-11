@@ -16,11 +16,6 @@
 		05A4D25A163C2F4000309444 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A4D259163C2F4000309444 /* Default.png */; };
 		05A4D25C163C2F4000309444 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A4D25B163C2F4000309444 /* Default@2x.png */; };
 		05A4D25E163C2F4000309444 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A4D25D163C2F4000309444 /* Default-568h@2x.png */; };
-		05A4D278163C2F7300309444 /* SPDepends.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4D26B163C2F7300309444 /* SPDepends.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		05A4D279163C2F7300309444 /* SPFunctional.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4D26D163C2F7300309444 /* SPFunctional.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		05A4D27A163C2F7300309444 /* SPKVONotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4D26F163C2F7300309444 /* SPKVONotificationCenter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		05A4D27B163C2F7300309444 /* SPLifetimeGlue.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4D271163C2F7300309444 /* SPLifetimeGlue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		05A4D27C163C2F7300309444 /* SPLowVerbosity.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4D273163C2F7300309444 /* SPLowVerbosity.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		05A4D292163C2F8600309444 /* SPBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4D285163C2F8600309444 /* SPBadgeView.m */; };
 		05A4D293163C2F8600309444 /* SPSeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4D287163C2F8600309444 /* SPSeparatorView.m */; };
 		05A4D294163C2F8600309444 /* SPSideTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4D288163C2F8600309444 /* SPSideTabController.m */; };
@@ -48,6 +43,7 @@
 		05A4D2C5163C37BB00309444 /* SPSideTabBar-button-overlay+selected+pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A4D2C2163C37BB00309444 /* SPSideTabBar-button-overlay+selected+pressed.png */; };
 		05A4D2C8163C3E2900309444 /* 114-balloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A4D2C6163C3E2900309444 /* 114-balloon.png */; };
 		05A4D2C9163C3E2900309444 /* 185-printer.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A4D2C7163C3E2900309444 /* 185-printer.png */; };
+		05BD7D1E18CF8DBE00A990C9 /* SPFunctional-mini.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BD7D1D18CF8DBE00A990C9 /* SPFunctional-mini.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,17 +60,6 @@
 		05A4D259163C2F4000309444 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		05A4D25B163C2F4000309444 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		05A4D25D163C2F4000309444 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		05A4D26A163C2F7300309444 /* SPDepends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDepends.h; sourceTree = "<group>"; };
-		05A4D26B163C2F7300309444 /* SPDepends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDepends.m; sourceTree = "<group>"; };
-		05A4D26C163C2F7300309444 /* SPFunctional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPFunctional.h; sourceTree = "<group>"; };
-		05A4D26D163C2F7300309444 /* SPFunctional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPFunctional.m; sourceTree = "<group>"; };
-		05A4D26E163C2F7300309444 /* SPKVONotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPKVONotificationCenter.h; sourceTree = "<group>"; };
-		05A4D26F163C2F7300309444 /* SPKVONotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPKVONotificationCenter.m; sourceTree = "<group>"; };
-		05A4D270163C2F7300309444 /* SPLifetimeGlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPLifetimeGlue.h; sourceTree = "<group>"; };
-		05A4D271163C2F7300309444 /* SPLifetimeGlue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPLifetimeGlue.m; sourceTree = "<group>"; };
-		05A4D272163C2F7300309444 /* SPLowVerbosity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPLowVerbosity.h; sourceTree = "<group>"; };
-		05A4D273163C2F7300309444 /* SPLowVerbosity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPLowVerbosity.m; sourceTree = "<group>"; };
-		05A4D276163C2F7300309444 /* SPSuccinct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSuccinct.h; sourceTree = "<group>"; };
 		05A4D281163C2F8600309444 /* SPSideTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSideTabController.h; sourceTree = "<group>"; };
 		05A4D282163C2F8600309444 /* SPStackedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPStackedNavigationController.h; sourceTree = "<group>"; };
 		05A4D284163C2F8600309444 /* SPBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPBadgeView.h; sourceTree = "<group>"; };
@@ -114,6 +99,8 @@
 		05A4D2C2163C37BB00309444 /* SPSideTabBar-button-overlay+selected+pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SPSideTabBar-button-overlay+selected+pressed.png"; sourceTree = "<group>"; };
 		05A4D2C6163C3E2900309444 /* 114-balloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "114-balloon.png"; path = "icons-from-glyphish/114-balloon.png"; sourceTree = SOURCE_ROOT; };
 		05A4D2C7163C3E2900309444 /* 185-printer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "185-printer.png"; path = "icons-from-glyphish/185-printer.png"; sourceTree = SOURCE_ROOT; };
+		05BD7D1C18CF8DBE00A990C9 /* SPFunctional-mini.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SPFunctional-mini.h"; sourceTree = "<group>"; };
+		05BD7D1D18CF8DBE00A990C9 /* SPFunctional-mini.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SPFunctional-mini.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				05A4D24D163C2F4000309444 /* StackExample */,
-				05A4D268163C2F7300309444 /* SPSuccinct */,
 				05A4D29A163C2F8900309444 /* Stacked nav */,
 				05A4D246163C2F4000309444 /* Frameworks */,
 				05A4D244163C2F4000309444 /* Products */,
@@ -193,25 +179,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		05A4D268163C2F7300309444 /* SPSuccinct */ = {
-			isa = PBXGroup;
-			children = (
-				05A4D26A163C2F7300309444 /* SPDepends.h */,
-				05A4D26B163C2F7300309444 /* SPDepends.m */,
-				05A4D26C163C2F7300309444 /* SPFunctional.h */,
-				05A4D26D163C2F7300309444 /* SPFunctional.m */,
-				05A4D26E163C2F7300309444 /* SPKVONotificationCenter.h */,
-				05A4D26F163C2F7300309444 /* SPKVONotificationCenter.m */,
-				05A4D270163C2F7300309444 /* SPLifetimeGlue.h */,
-				05A4D271163C2F7300309444 /* SPLifetimeGlue.m */,
-				05A4D272163C2F7300309444 /* SPLowVerbosity.h */,
-				05A4D273163C2F7300309444 /* SPLowVerbosity.m */,
-				05A4D276163C2F7300309444 /* SPSuccinct.h */,
-			);
-			name = SPSuccinct;
-			path = vendor/SPSuccinct/SPSuccinct;
-			sourceTree = "<group>";
-		};
 		05A4D27F163C2F8600309444 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +217,8 @@
 				05A4D28F163C2F8600309444 /* SPStackedPageContainer.m */,
 				05A4D290163C2F8600309444 /* UIImage+SPTabBarImage.h */,
 				05A4D291163C2F8600309444 /* UIImage+SPTabBarImage.m */,
+				05BD7D1C18CF8DBE00A990C9 /* SPFunctional-mini.h */,
+				05BD7D1D18CF8DBE00A990C9 /* SPFunctional-mini.m */,
 			);
 			name = Sources;
 			path = ../../Sources;
@@ -365,13 +334,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05BD7D1E18CF8DBE00A990C9 /* SPFunctional-mini.m in Sources */,
 				05A4D254163C2F4000309444 /* main.m in Sources */,
 				05A4D258163C2F4000309444 /* SPAppDelegate.m in Sources */,
-				05A4D278163C2F7300309444 /* SPDepends.m in Sources */,
-				05A4D279163C2F7300309444 /* SPFunctional.m in Sources */,
-				05A4D27A163C2F7300309444 /* SPKVONotificationCenter.m in Sources */,
-				05A4D27B163C2F7300309444 /* SPLifetimeGlue.m in Sources */,
-				05A4D27C163C2F7300309444 /* SPLowVerbosity.m in Sources */,
 				05A4D292163C2F8600309444 /* SPBadgeView.m in Sources */,
 				05A4D293163C2F8600309444 /* SPSeparatorView.m in Sources */,
 				05A4D294163C2F8600309444 /* SPSideTabController.m in Sources */,
