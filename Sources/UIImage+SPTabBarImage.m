@@ -97,7 +97,7 @@ static UIImage *SPMakeTabBarImage(UIImage *source, SPTabBarImageState state)
         struct Pixel pixels[(int)(r.size.width*r.size.height)];
         memset(pixels, 0, sizeof(pixels));
         CGColorSpaceRef cspace = CGColorSpaceCreateDeviceRGB();
-        CGContextRef maskContext = CGBitmapContextCreate(pixels, r.size.width, r.size.height, 8, r.size.width*4, cspace, kCGImageAlphaPremultipliedLast);
+        CGContextRef maskContext = CGBitmapContextCreate(pixels, r.size.width, r.size.height, 8, r.size.width*4, cspace, (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
         CGColorSpaceRelease(cspace);
         CGContextTranslateCTM(maskContext, 0, r.size.height);
         CGContextScaleCTM(maskContext, 1.0, -1.0);
