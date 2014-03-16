@@ -16,7 +16,7 @@ There are two main advantages to this approach:
 
 The main drawback is that you should no longer use horizontal gestures, as they will interfere with navigation, or the other way around.
 
-At Spotify, we use this style for navigation in our iPad app. We are very proud of the outcome, and are contributing it back to the community, in hopes that others will find it as useful as we do.
+At Spotify, we use this style for navigation in our iPad app. We are very proud of the outcome, and are contributing it back to the community, in hopes that others will find it as useful as we do. This code has been used for several years at Spotify and should be very stable.
 
 In our implementation, a page can either be "full size" and thus cover the whole width of the parent container (which we use for the root view controllers in our stacks), or half-size (exactly two will fit in landscape, or one and a half in portrait).
 
