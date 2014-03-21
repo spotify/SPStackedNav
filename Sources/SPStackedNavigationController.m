@@ -41,7 +41,6 @@
     return self;
 }
 
-static const float kUnknownFrameSize = 10;
 - (void)loadView
 {
     CGRect frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
