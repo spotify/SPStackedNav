@@ -49,7 +49,15 @@
     _text = [text copy];
     // Resize to fit the badge
     CGRect r = self.frame;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
     r.size = [self.text sizeWithFont:self.font];
+#else
+    if (self.font) {
+        r.size = [self.text sizeWithAttributes:@{
+                                                 NSFontAttributeName : self.font
+                                                 }];
+    }
+#endif
     r.size.width += 16;
     r.size.height += 2;
 
@@ -104,12 +112,33 @@
     CGColorSpaceRelease(colorSpace);
     
     CGRect textRect = self.bounds;
+    
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
     CGSize textSize = [self.text sizeWithFont:self.font];
+#else
+    CGSize textSize = CGSizeZero;
+    textSize = [self.text sizeWithAttributes:@{
+                                               NSFontAttributeName : self.font
+                                               }];
+#endif
+
+    
     textRect.origin.y = textRect.size.height / 2 - textSize.height / 2;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
     [self.text drawInRect:textRect
                  withFont:self.font
             lineBreakMode:NSLineBreakByClipping
                 alignment:NSTextAlignmentCenter];
+#else
+    NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
+    style.lineBreakMode = NSLineBreakByClipping;
+    style.alignment = NSTextAlignmentCenter;
+    [self.text drawInRect:textRect
+           withAttributes:@{
+                            NSFontAttributeName : self.font,
+                            NSParagraphStyleAttributeName : style
+                            }];
+#endif
 }
 
 @end
