@@ -69,13 +69,18 @@ typedef enum
 
 
 
-static const CGFloat kSPStackedNavigationHalfPageWidth = 472;
+static const CGFloat kSPStackedNavigationHalfPageWidth = 472.f;
+static const CGFloat kSPStackedNavigationSplitViewWidthLeft = 320.f;
+static const CGFloat kSPStackedNavigationSplitViewWidthRight = 704.f;
 
 enum {
     /// Fills the width of the screen in landscape (excluding sidebar)
     kStackedPageHalfSize = 1,
     /// Uses the full available width
-    kStackedPageFullSize = 2
+    kStackedPageFullSize = 2,
+    // using splitview sizes
+    kStackedPageSplitViewWidthLeft = 3,
+    kStackedPageSplitViewWidthRight = 4,
 };
 typedef int SPStackedNavigationPageSize;
 
