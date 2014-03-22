@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
 
-  s.name         = "SPStackedNav"
-  s.version      = "1.0.0"
-  s.summary      = "UINavigationController drop-in replacement with stacks of panes, like Spotify or old Twitter."
+  s.name         = 'SPStackedNav'
+  s.version      = '1.0.0'
+  s.summary      = 'UINavigationController drop-in replacement with stacks of panes, like Spotify or old Twitter.'
 
   s.description  = <<-DESC
     SPStackedNavigationController is a UINavigationController drop-in replacement,
@@ -21,19 +21,19 @@ Pod::Spec.new do |s|
 
     The main drawback is that you should no longer use horizontal gestures, as
     they will interfere with navigation, or the other way around.
-                   DESC
+  DESC 
 
-  s.homepage     = "http://github.com/spotify/SPStackedNav"
-  s.screenshots  = "http://f.cl.ly/items/2H2p0b1H3A2K3T0E040u/mzl.lmmfkkux.480x480-75.jpg"
+  s.homepage     = 'http://github.com/spotify/SPStackedNav'
+  s.screenshots  = 'http://f.cl.ly/items/2H2p0b1H3A2K3T0E040u/mzl.lmmfkkux.480x480-75.jpg'
 
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
 
-  s.author             = { "Joachim Bengtsson" => "nevyn@spotify.com" }
-  s.social_media_url   = "http://twitter.com/nevyn"
+  s.author             = { Joachim Bengtsson' => 'nevyn@spotify.com' }
+  s.social_media_url   = 'http://twitter.com/nevyn'
 
   s.platform      = :ios, '5.0'
 
-  s.source        = { :git => "https://github.com/spotify/SPStackedNav.git", :tag => "1.0.0" }
+  s.source        = { :git => 'https://github.com/spotify/SPStackedNav.git', :tag => '1.0.0' }
   s.source_files  = 'Classes', 'Sources/*.{h,m}'
   s.public_header_files = 'include/SPStackedNav/*.h'
   s.preserve_path = "include"
