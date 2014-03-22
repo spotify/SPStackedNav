@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
 
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
 
-  s.author             = { Joachim Bengtsson' => 'nevyn@spotify.com' }
+  s.author             = { 'Joachim Bengtsson' => 'nevyn@spotify.com' }
   s.social_media_url   = 'http://twitter.com/nevyn'
 
   s.platform      = :ios, '5.0'
