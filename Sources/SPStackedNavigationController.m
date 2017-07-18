@@ -71,9 +71,26 @@ static const float kUnknownFrameSize = 10;
 {
     CGSize size = self.view.frame.size;
     CGRect frame = CGRectMake(self.view.bounds.size.width, 0, 0, size.height);
-    frame.size.width = (viewController.stackedNavigationPageSize == kStackedPageHalfSize ?
-                        kSPStackedNavigationHalfPageWidth :
-                        size.width);
+    CGFloat width;
+    switch (viewController.stackedNavigationPageSize) {
+        case kStackedPageHalfSize:
+            width = kSPStackedNavigationHalfPageWidth;
+            break;
+            
+        case kStackedPageSplitViewWidthLeft:
+            width = kSPStackedNavigationSplitViewWidthLeft;
+            break;
+            
+        case kStackedPageSplitViewWidthRight:
+            width = kSPStackedNavigationSplitViewWidthRight;
+            break;
+            
+        case kStackedPageFullSize:
+        default:
+            width = frame.size.width;
+            break;
+    }
+    frame.size.width = width;
     
     SPStackedPageContainer *pageC = [[SPStackedPageContainer alloc] initWithFrame:frame VC:viewController];
     [_scroll addSubview:pageC];
